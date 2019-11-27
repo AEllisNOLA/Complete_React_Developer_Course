@@ -11,6 +11,57 @@ const template = (
         <p>{app.options.length > 0 ? 'Here are your options: ' : 'No options.'}</p>
     </div>
 )
+
+// COUNTER EXAMPLE
+let count = 0
+
+const addOne = () => {
+    count++
+    renderCounterApp()
+}
+
+const minusOne = () => {
+    count--
+    renderCounterApp()
+}
+
+const resetCounter = () => {
+    count = 0
+    renderCounterApp()
+}
+
+
+const appRoot = document.getElementById('app')
+
+
+const counterTemplate = (
+    <div>
+        <h1>Current Count: {count}</h1>
+        <button onClick={addOne}>+1</button>
+        <button onClick={minusOne}>-1</button>
+        <button onClick={resetCounter}>Reset</button>
+    </div>
+)
+
+
+
+
+const renderCounterApp = () => {
+    const counterTemplate = (
+        <div>
+            <h1>Current Count: {count}</h1>
+            <button onClick={addOne}>+1</button>
+            <button onClick={minusOne}>-1</button>
+            <button onClick={resetCounter}>Reset</button>
+        </div>
+    )
+
+    ReactDOM.render(counterTemplate, appRoot)
+
+}
+
+renderCounterApp()
+// USER EXAMPLE
 /*
 const user = {
     name: 'Anthony',
@@ -32,7 +83,3 @@ const userInfo = (
     </div>
 )
 */
-
-const appRoot = document.getElementById('app')
-
-ReactDOM.render(template, appRoot)

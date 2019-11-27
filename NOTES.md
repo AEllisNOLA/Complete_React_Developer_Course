@@ -115,3 +115,21 @@ const user = {
 }
 */
 ```
+
+
+## 3.15 - Events and Attributes
+- Certain attributes are reserved in JavaScript but in common use in HTML. As a result, there are slight differences, such as having to use _className_ instead of _class_ as the attribute. A full list can be found in React docs under 'DOM Elements'.
+
+- Event Handlers can be done by referring to an outside function or inline. It tends to be cleaner to refer to an outside function, though.
+
+```
+const addOne = () => {
+    console.log('addOne() fired')
+}
+
+<button onClick={addOne}>+1</button>
+<button onClick={() => { console.log('subtractOne fired') }}>-1</button>
+```
+
+## 3.16 - Manual Data Binding
+- JSX does not have built-in data binding. All the data used inside JSX happens at the time the code runs, so re-rending is needed to update info on the screen.
