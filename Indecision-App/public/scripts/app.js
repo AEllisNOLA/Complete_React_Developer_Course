@@ -3,125 +3,90 @@
 var app = {
     title: 'Decisioner',
     subtitle: 'For When Decisions are Hard',
-    options: ['Option 1', 'Option 2']
+    options: []
+
+    // Numbers Example
+};var numbers = [55, 101, 1000];
+
+// Decisioner App
+var onFormSubmit = function onFormSubmit(e) {
+    e.preventDefault();
+    // forms have access to an elements object
+    var option = e.target.elements.option.value;
+
+    if (option) {
+        app.options.push(e.target.elements.option.value);
+        e.target.elements.option.value = '';
+        render();
+    }
 };
 
-var template = React.createElement(
-    'div',
-    null,
-    React.createElement(
-        'h1',
-        null,
-        app.title
-    ),
-    app.subtitle && React.createElement(
-        'h2',
-        null,
-        app.subtitle
-    ),
-    React.createElement(
-        'p',
-        null,
-        app.options.length > 0 ? 'Here are your options: ' : 'No options.'
-    )
-);
-
-// COUNTER EXAMPLE
-var count = 0;
-
-var addOne = function addOne() {
-    count++;
-    renderCounterApp();
+var onRemoveAll = function onRemoveAll() {
+    app.options = [];
+    render();
 };
 
-var minusOne = function minusOne() {
-    count--;
-    renderCounterApp();
-};
-
-var resetCounter = function resetCounter() {
-    count = 0;
-    renderCounterApp();
-};
-
-var appRoot = document.getElementById('app');
-
-var counterTemplate = React.createElement(
-    'div',
-    null,
-    React.createElement(
-        'h1',
-        null,
-        'Current Count: ',
-        count
-    ),
-    React.createElement(
-        'button',
-        { onClick: addOne },
-        '+1'
-    ),
-    React.createElement(
-        'button',
-        { onClick: minusOne },
-        '-1'
-    ),
-    React.createElement(
-        'button',
-        { onClick: resetCounter },
-        'Reset'
-    )
-);
-
-var renderCounterApp = function renderCounterApp() {
-    var counterTemplate = React.createElement(
+var render = function render() {
+    var template = React.createElement(
         'div',
         null,
         React.createElement(
             'h1',
             null,
-            'Current Count: ',
-            count
+            app.title
+        ),
+        app.subtitle && React.createElement(
+            'h2',
+            null,
+            app.subtitle
+        ),
+        React.createElement(
+            'p',
+            null,
+            app.options.length > 0 ? 'Here are your options: ' : 'No options.'
+        ),
+        React.createElement(
+            'p',
+            null,
+            app.options.length
         ),
         React.createElement(
             'button',
-            { onClick: addOne },
-            '+1'
+            { onClick: onRemoveAll },
+            'Remove All'
+        ),
+        numbers.map(function (number) {
+            return React.createElement(
+                'p',
+                { key: number },
+                'Number: ',
+                number
+            );
+        }),
+        React.createElement(
+            'ol',
+            null,
+            app.options.map(function (option) {
+                return React.createElement(
+                    'li',
+                    { key: option },
+                    option
+                );
+            })
         ),
         React.createElement(
-            'button',
-            { onClick: minusOne },
-            '-1'
-        ),
-        React.createElement(
-            'button',
-            { onClick: resetCounter },
-            'Reset'
+            'form',
+            { onSubmit: onFormSubmit },
+            React.createElement('input', { type: 'text', name: 'option' }),
+            React.createElement(
+                'button',
+                null,
+                'Add Option'
+            )
         )
     );
-
-    ReactDOM.render(counterTemplate, appRoot);
+    ReactDOM.render(template, appRoot);
 };
 
-renderCounterApp();
-// USER EXAMPLE
-/*
-const user = {
-    name: 'Anthony',
-    age: 15,
-    location: 'Baton Rouge, LA'
-}
-
-function getLocation(location) {
-    if (location) {
-        return <p>Location: {location}</p>
-    }
-}
-
-const userInfo = (
-    <div>
-        <h1>{user.name ? user.name : 'Anonymous'}</h1>
-        {(user.age && user.age >= 18) && <p>Age: {user.age}</p>}
-        {getLocation(user.location)}
-    </div>
-)
-*/
+var appRoot = document.getElementById('app');
+render();

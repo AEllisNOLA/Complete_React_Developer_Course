@@ -133,3 +133,10 @@ const addOne = () => {
 
 ## 3.16 - Manual Data Binding
 - JSX does not have built-in data binding. All the data used inside JSX happens at the time the code runs, so re-rending is needed to update info on the screen.
+
+## 3.17 - Arrays in JSX
+- JSX supports Arrays, strings and numbers. It does not work with Objects. It ignores booleans, null and undefined.
+
+- You can also have arrays of JSX
+
+- When rendering an array, each item needs a unique key property for React to be able to grab onto for re-rendering purposes.
