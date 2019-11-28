@@ -1,28 +1,9 @@
 'use strict';
 
-var app = {
-    title: 'Decisioner',
-    subtitle: 'For When Decisions are Hard',
-    options: []
+var hidden = true;
 
-    // Numbers Example
-};var numbers = [55, 101, 1000];
-
-// Decisioner App
-var onFormSubmit = function onFormSubmit(e) {
-    e.preventDefault();
-    // forms have access to an elements object
-    var option = e.target.elements.option.value;
-
-    if (option) {
-        app.options.push(e.target.elements.option.value);
-        e.target.elements.option.value = '';
-        render();
-    }
-};
-
-var onRemoveAll = function onRemoveAll() {
-    app.options = [];
+var toggleView = function toggleView() {
+    hidden = !hidden;
     render();
 };
 
@@ -33,60 +14,20 @@ var render = function render() {
         React.createElement(
             'h1',
             null,
-            app.title
-        ),
-        app.subtitle && React.createElement(
-            'h2',
-            null,
-            app.subtitle
-        ),
-        React.createElement(
-            'p',
-            null,
-            app.options.length > 0 ? 'Here are your options: ' : 'No options.'
-        ),
-        React.createElement(
-            'p',
-            null,
-            app.options.length
+            'Visibility Toggle'
         ),
         React.createElement(
             'button',
-            { onClick: onRemoveAll },
-            'Remove All'
+            { onClick: toggleView },
+            hidden ? 'Show Details' : 'Hide Details'
         ),
-        numbers.map(function (number) {
-            return React.createElement(
-                'p',
-                { key: number },
-                'Number: ',
-                number
-            );
-        }),
-        React.createElement(
-            'ol',
+        !hidden && React.createElement(
+            'p',
             null,
-            app.options.map(function (option) {
-                return React.createElement(
-                    'li',
-                    { key: option },
-                    option
-                );
-            })
-        ),
-        React.createElement(
-            'form',
-            { onSubmit: onFormSubmit },
-            React.createElement('input', { type: 'text', name: 'option' }),
-            React.createElement(
-                'button',
-                null,
-                'Add Option'
-            )
+            'Details'
         )
     );
-    ReactDOM.render(template, appRoot);
+    ReactDOM.render(template, document.getElementById('app'));
 };
 
-var appRoot = document.getElementById('app');
 render();
