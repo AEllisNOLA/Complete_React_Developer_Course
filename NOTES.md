@@ -140,3 +140,102 @@ const addOne = () => {
 - You can also have arrays of JSX
 
 - When rendering an array, each item needs a unique key property for React to be able to grab onto for re-rendering purposes.
+
+## 4.24 - ES6 Classes
+- Classes do not always need constructor functions, but if they will be accepting any arguments they do.
+
+- Inside of class methods, _this_ refers to the class instance
+
+- In older code, you would default a value within the constructor using the _OR_ logical operator. 
+
+```
+class Person {
+    constructor(name) {
+        this.name = name || 'Jane Doe'
+    }
+}
+```
+
+However, with ES6 you can just provide the default when passing the argument
+
+```
+class Person {
+    constructor(name = 'Jane Doe') {
+        this.name = name
+    }
+}
+```
+
+## 4.25 - ES6 Classes Part 2
+- A subclass can accept all of the features of its parent class, but add new ones or overwrite already-existing ones.
+
+- The super() function is responsible for calling the parent constructor function in subclasses. It belongs in the subclass constructor function before any additional arguments are added beyond what the parent class already had.
+
+```
+class Student extends Person {
+    constructor(name, age, major = 'Undeclared') {
+        super(name, age)
+        this.major = major
+    }
+}
+```
+
+ The items in the super() function do the job of this.name = name and this.age = age, since those were already defined in the parent class.
+
+ super() may also be used to access parent methods.
+
+ ```
+ getDescription() {
+        let description = super.getDescription()
+        
+        if (this.hasMajor()) {
+            description += ` and has a major of ${this.major}`
+        }
+        
+        return description
+    }
+ ```
+
+ ## 4.26 - React Components
+ - A component is just an ES6 Class. React requires a component start with a capital letter (whereas in ES6 a class with a capital letter is a convention but not required.) A React component starting with a lower-case letter would not break the program, but the component would not show up because the capital letter is how React differentiates an HTML element from a React Component. A component can be extended from _React.Component_ and requires a render method.
+
+ ```
+ class Header extends React.Component {
+    render() {
+        return <p>This is a Header!</p>
+    }
+}
+ ```
+
+ - In order to use the components, you simply add the Component inside of JSX
+
+ ```
+ const jsx = (
+    <div>
+        <Header />
+    </div>
+)
+
+ReactDOM.render(jsx, document.getElementById('app'))
+ ```
+
+  ## 4.27 - Nesting Components
+
+- Rather than rendering a variable inside of ReactDOM.render(), it is better to render the component for the entire app. Create a new component with many subcomponents that create the skeleton of the app, then render that to the screen.
+
+```
+class IndecisionApp extends React.Component {
+    render() {
+        return (
+            <div>
+                <Header />
+                <Action />
+                <Options />
+                <AddOption />
+            </div>
+        )
+    }
+}
+
+ReactDOM.render(<IndecisionApp />, document.getElementById('app'))
+```
