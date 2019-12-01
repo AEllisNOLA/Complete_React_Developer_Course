@@ -196,7 +196,7 @@ class Student extends Person {
     }
  ```
 
- ## 4.26 - React Components
+## 4.26 - React Components
  - A component is just an ES6 Class. React requires a component start with a capital letter (whereas in ES6 a class with a capital letter is a convention but not required.) A React component starting with a lower-case letter would not break the program, but the component would not show up because the capital letter is how React differentiates an HTML element from a React Component. A component can be extended from _React.Component_ and requires a render method.
 
  ```
@@ -219,7 +219,7 @@ class Student extends Person {
 ReactDOM.render(jsx, document.getElementById('app'))
  ```
 
-  ## 4.27 - Nesting Components
+## 4.27 - Nesting Components
 
 - Rather than rendering a variable inside of ReactDOM.render(), it is better to render the component for the entire app. Create a new component with many subcomponents that create the skeleton of the app, then render that to the screen.
 
@@ -239,3 +239,41 @@ class IndecisionApp extends React.Component {
 
 ReactDOM.render(<IndecisionApp />, document.getElementById('app'))
 ```
+
+## 4.28 - Component Props
+- Values of a component can be customized for the instance by using props. A prop can be named basically anything. They are accessed through _this.props_.
+
+Being rendered in the overall component is:
+
+```
+class IndecisionApp extends React.Component {
+    render() {
+        const title = 'Decisioner!'
+        const subtitle = 'For When Decisions are Hard!'
+        const options = ['Option 1', 'Option 2', 'Option 3']
+
+        return (
+            <div>
+                <Header title={title} subtitle={subtitle} />
+            </div>
+        )
+    }
+}
+```
+
+and the Header component would look like:
+
+```
+class Header extends React.Component {
+    render() {
+        return (
+            <div>
+                <h1>{this.props.title}</h1>
+                <h2>{this.props.subtitle}</h2>
+            </div>
+        )
+    }
+}
+```
+
+- props are a form of one-way communication. The overall app can initiate props for a Component. Later in that component, props can be created for its children components. Props move down.

@@ -20,12 +20,16 @@ var IndecisionApp = function (_React$Component) {
     _createClass(IndecisionApp, [{
         key: 'render',
         value: function render() {
+            var title = 'Decisioner!';
+            var subtitle = 'For When Decisions are Hard!';
+            var options = ['Option 1', 'Option 2', 'Option 3'];
+
             return React.createElement(
                 'div',
                 null,
-                React.createElement(Header, null),
+                React.createElement(Header, { title: title, subtitle: subtitle }),
                 React.createElement(Action, null),
-                React.createElement(Options, null),
+                React.createElement(Options, { options: options }),
                 React.createElement(AddOption, null)
             );
         }
@@ -52,12 +56,12 @@ var Header = function (_React$Component2) {
                 React.createElement(
                     'h1',
                     null,
-                    'Decisioner'
+                    this.props.title
                 ),
                 React.createElement(
                     'h2',
                     null,
-                    'For When Decisions are Hard'
+                    this.props.subtitle
                 )
             );
         }
@@ -108,12 +112,9 @@ var Options = function (_React$Component4) {
             return React.createElement(
                 'div',
                 null,
-                React.createElement(
-                    'p',
-                    null,
-                    'Options Component goes here.'
-                ),
-                React.createElement(Option, null)
+                this.props.options.map(function (option) {
+                    return React.createElement(Option, { key: option, optionText: option });
+                })
             );
         }
     }]);
@@ -166,7 +167,8 @@ var Option = function (_React$Component6) {
                 React.createElement(
                     'p',
                     null,
-                    'Option subcomponent within Options Component.'
+                    'Option: ',
+                    this.props.optionText
                 )
             );
         }
