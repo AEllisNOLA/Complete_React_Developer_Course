@@ -277,3 +277,46 @@ class Header extends React.Component {
 ```
 
 - props are a form of one-way communication. The overall app can initiate props for a Component. Later in that component, props can be created for its children components. Props move down.
+
+## 4.29 - Events and Methods
+
+- When working with forms, onSubmit must be used on the form tag. To retreive the value, use e.target.elements._____.value, where the black is equal to the name attribute of the element you are trying to grab data from. And remember to use e.preventDefault() to prevent automatic page reload with the data in the URL. Aldo, reset value to '' after submit.
+
+## 4.30 - Method Binding
+- In certain situations, you will have to set the _this_ binding because the context that the function ran in is different. _bind_ is a method on a function that returns the function. As an argument, you can attach it to the context you want it to be called in.
+
+```
+const obj = {
+    name: 'Anthony',
+    getName() {
+        return this.name
+    }
+}
+
+console.log(obj.getName())  // 'Anthony. Works as expected
+
+// const getName = obj.getName  // getName references the method, but the context is now different
+// console.log(getName())  // uncaught typeerror, property 'name' undefined.
+
+const getName = obj.getName.bind(obj)  // use getName and set the context to that of obj
+console.log(getName()) // 'Anthony'! IT WORKS!
+```
+
+- In event handlers, you lose the _this_ binding. They do not to lose the context in the render() or constructor() functions because it is not an event callback. Since _this_ works there, you can bind the event handler manually to _this_.
+
+```
+<button onClick={this.handleRemoveAll.bind(this)}>Remove All</button>
+```
+
+However, while you can simply bind to _this_ in the event handler, that binding will take place upon every re-render, which gets expensive.
+
+- The better way is to override the _constructor function_ for _React.Component_. In order to override, you must add the constructor function with 'props' as an argument and call super(props). Then set the method equal to itself with _.bind(this)_ added.
+
+```
+class Options extends React.Component {
+    constructor(props) {
+        super(props)
+        this.handleRemoveAll = this.handleRemoveAll.bind(this)
+    }
+}
+```
