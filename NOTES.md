@@ -117,7 +117,7 @@ const user = {
 ```
 
 
-## 3.15 - Events and Attributes
+## 3.16 - Events and Attributes
 - Certain attributes are reserved in JavaScript but in common use in HTML. As a result, there are slight differences, such as having to use _className_ instead of _class_ as the attribute. A full list can be found in React docs under 'DOM Elements'.
 
 - Event Handlers can be done by referring to an outside function or inline. It tends to be cleaner to refer to an outside function, though.
@@ -131,10 +131,10 @@ const addOne = () => {
 <button onClick={() => { console.log('subtractOne fired') }}>-1</button>
 ```
 
-## 3.16 - Manual Data Binding
+## 3.17 - Manual Data Binding
 - JSX does not have built-in data binding. All the data used inside JSX happens at the time the code runs, so re-rending is needed to update info on the screen.
 
-## 3.17 - Arrays in JSX
+## 3.19 - Arrays in JSX
 - JSX supports Arrays, strings and numbers. It does not work with Objects. It ignores booleans, null and undefined.
 
 - You can also have arrays of JSX
@@ -238,7 +238,7 @@ class IndecisionApp extends React.Component {
 }
 
 ReactDOM.render(<IndecisionApp />, document.getElementById('app'))
-```
+```                                                                                                                                                                                                  
 
 ## 4.28 - Component Props
 - Values of a component can be customized for the instance by using props. A prop can be named basically anything. They are accessed through _this.props_.
@@ -320,3 +320,71 @@ class Options extends React.Component {
     }
 }
 ```
+
+## 4.31 - What is Component State
+- State allows components to manage data, such as key-value pairs. When the data changes, the component will automatically re-render.
+
+- Step 1: Create default set of values (as an object), such as 0 or an empty array. 
+
+- Step 2: Component goes through its inital render using the default values.
+
+- Step 3: The component's state changes based on an event such as a network request or user event.
+
+- Step 4: The app then re-renders, using the new state values and bringing the UI to match the state.
+
+- The last step is to start again at step 3.
+
+## 4.33 - Adding State to Counter App
+- NEVER change state directly. The component will not update
+
+```
+// WRONG!!!
+this.state.count = 1  
+```
+
+```
+/// RIGHT!!!
+ this.setState(() => {
+            return {
+                count: 1
+            }
+        })
+```
+
+- In order to change the state based off its current value, use prevState as an argument.
+
+```
+this.setState((prevState) => {
+            return {
+                count: prevState.count + 1
+            }
+        })
+```
+
+- When using this.setState(), you only need to provide the items you wish to change. If your default data is 10 key-value pairs and you only want to alter one of them, just feed it the one you want to change. You only override specific values but non-specified values remain the same.
+
+## 4.34 - Alternative setState Syntax
+- The above syntax is called the 'Updater Function'
+
+- An older approach to setState allows for passing in an object directly in rather than a function.
+
+```
+this.setState({
+    count: 0
+})
+```
+
+- The issue with the older version is that this.setState() is asynchronous. Multiple this.setState()s can lead to unexpected behavior due to this async aspect. You wind up accessing old, outdated data before it can update.
+
+- The updater function never accesses this.setState, but prevState, so it never runs into that issue.
+
+## 4.36 - Indecision State - Part I
+- When children need to manipulate the state that is in the parent. Since props only move downward, you have to pass functions in as a prop. The child then calls that function as a prop. This is how you reverse data flow
+
+- New prop values passed down from the parent trigger a re-render of the child component. Props are read-only within their own component, but the parent can pass in new prop values.
+
+## 4.37 - Indecision State - Part II
+
+- In order to pass data upstream, you should create a function in the parent that accepts an argument. Pass that function down as a prop. When it is called in child component, you can pass the child component's data in, bringing it up to the parent. 
+
+- When doing additional steps, it is okay to pass the prop from the parent into a method on the component rather than in the JSX on the render() method.
