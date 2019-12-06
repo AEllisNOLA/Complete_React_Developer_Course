@@ -388,3 +388,56 @@ this.setState({
 - In order to pass data upstream, you should create a function in the parent that accepts an argument. Pass that function down as a prop. When it is called in child component, you can pass the child component's data in, bringing it up to the parent. 
 
 - When doing additional steps, it is okay to pass the prop from the parent into a method on the component rather than in the JSX on the render() method.
+
+## 5.40 - Stateless Functional Components
+- As a rule of thumb, stateless functional components take props via props.___, whereas class components take them as this.props.___
+
+- Stateless, functional components are faster than class-based components since they don't have any overhead. Use them whenever a component is purely presentational and have no state. They are also easier to test.
+
+## 5.41 - Default Prop Values
+- For Stateless components, adding default values is simple. Just call defaultProps on the component after it is created and alter it in object syntax.
+
+```
+const Header = (props) => {
+    return (
+        <div>
+            <h1>{props.title}</h1>
+            {props.subtitle && <h2>{props.subtitle}</h2>}
+        </div>
+    )
+}
+
+Header.defaultProps = {
+    title: 'Decisioner!',
+}
+```
+
+- For class components, you can set the state to the props value. After the component, call default Props using the object syntax and alter it to the default value. Now, if the user wants to add props to set their own default value, they can.
+```
+class IndecisionApp extends React.Component {
+    constructor(props) {
+        super(props)
+
+        this.handleDeleteOptions = this.handleDeleteOptions.bind(this)
+        this.handlePick = this.handlePick.bind(this)
+        this.handleAddOption = this.handleAddOption.bind(this)
+
+        this.state = {
+            options: props.options
+        }
+    }
+
+    ...
+    ...
+    ...
+}
+
+IndecisionApp.defaultProps = {
+    options: []
+}
+
+    ...
+    ...
+
+ReactDOM.render(<IndecisionApp options={['a', 'b', 'c', 'd']}/>, document.getElementById('app'))
+```
