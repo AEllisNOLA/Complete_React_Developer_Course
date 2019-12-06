@@ -441,3 +441,40 @@ IndecisionApp.defaultProps = {
 
 ReactDOM.render(<IndecisionApp options={['a', 'b', 'c', 'd']}/>, document.getElementById('app'))
 ```
+
+## 5.43 - Removing Individual Options
+- this.setState() can be cleaned up a bit using an arrow function's implicit return syntax. However, when you are trying to implicitely return an object, the curly-braces of an object get confused as the function body, so that object must be wrapped in parenthesis.
+
+```
+handleDeleteOptions() {
+        this.setState(() => {
+            return {
+                options: []
+            }
+        })
+    }
+```
+
+... becomes ...
+
+```
+handleDeleteOptions() {
+    this.setState(() => ({
+        options: []
+    }))       
+}
+```
+
+... and then, since it is a one-liner, it can be even shorter ...
+
+```
+ handleDeleteOptions() {
+    this.setState(() => ({ options: [] }))
+}
+```
+
+- When you want to pass in an argument rather than the default event object, you can pass in an in-line arrow function with an event argument rather than referencing the method directly. Then, call the method you are trying to call and pass in the information you are trying to move up the chain.
+
+```
+ <button onClick={((e) => props.handleDeleteOption(props.optionText)) }>Remove</button>
+```
