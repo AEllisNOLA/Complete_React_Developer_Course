@@ -478,3 +478,12 @@ handleDeleteOptions() {
 ```
  <button onClick={((e) => props.handleDeleteOption(props.optionText)) }>Remove</button>
 ```
+
+## 5.44 - Lifecycle Methods
+- Lifecycle Methods go on class components and fire at a certain time during a component's life. Such as: 
+
+    - componentDidMount which starts on load
+
+    - componentDidUpdate, which fires after state or prop values change. These have access to this.state/this.props for the updated info, as well as prevProp or prevState as arguments.
+
+    - componentWillUnmount, which fires just before a component goes away.
