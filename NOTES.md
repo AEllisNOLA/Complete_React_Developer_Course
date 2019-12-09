@@ -480,10 +480,18 @@ handleDeleteOptions() {
 ```
 
 ## 5.44 - Lifecycle Methods
-- Lifecycle Methods go on class components and fire at a certain time during a component's life. Such as: 
+- Lifecycle Methods go on class components and fire at a certain time during a component's life. There are several LifeCycle Methods, but here are 3: 
 
     - componentDidMount which starts on load
 
     - componentDidUpdate, which fires after state or prop values change. These have access to this.state/this.props for the updated info, as well as prevProp or prevState as arguments.
 
     - componentWillUnmount, which fires just before a component goes away.
+
+## 6.49 - Avoiding Global Modules
+- Webpack is great because: 
+    - 1) All dependencies are found in the package.json area, so it is easy to install all dependencies for collaborators.
+    - 2) You can specify distinct versions.
+    - 3) Scripts allow you to define run complicated scripts in a simpler manner once the script is defined.
+
+- There is nothing wrong with global modules inherently, but doing it this way is better.
