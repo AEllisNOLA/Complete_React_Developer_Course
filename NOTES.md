@@ -495,3 +495,61 @@ handleDeleteOptions() {
     - 3) Scripts allow you to define run complicated scripts in a simpler manner once the script is defined.
 
 - There is nothing wrong with global modules inherently, but doing it this way is better.
+
+## 6.51 - ES6 Import/Exports
+- Each file can export one item by default and has unlimited named exports
+
+- To export, name the functions you'd like to export in curly braces at the bottom of the file.
+
+```
+export { isAdult, canDrink }
+```
+
+- To import, name the functions you want to grab in curly braces at the top of the file:
+
+```
+import { isAdult, canDrink } from './person'
+```
+
+## 6.52 - Default Exports
+- To export, simply write 'as default' by the function you want to use as the default. Remember, only one may be default: 
+
+```
+export { square, add, subtract as default }
+```
+
+Alternatively, you can put 'export' in front of the function for an in-line export.
+
+```
+export const add = (a, b) => a + b
+```
+
+- To import, keep the default function out of curly braces:
+
+```
+import subtract, { square, add } from './utils.js'
+```
+
+- Default exports are special because they do not need to have the same name as the file they are importing from. An add() function could be called a sum() function instead as long as you specify it up top.
+
+- You may also in-line an export default.
+
+```
+const subtract = (a, b) => a - b
+
+export default subtract
+```
+
+or one-line it by removing the const functionName
+
+```
+export default (a, b) => a - b
+```
+
+## 6.53- Importing NPM Modules
+- You can import NPM modules much like you do your own files/functions. Instructions should be in the documentation for the third-party library you are using. Instead of importing from a certain path, you import from the name of the library.
+
+```
+import validator from 'validator'
+```
+## 6.54 - Setting up Babel with Webpack
