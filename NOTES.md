@@ -554,3 +554,9 @@ import validator from 'validator'
 ```
 ## 6.55 - One Component Per File
 - It is conventional to put each component in its own file. This helps with reusability, scalability, maintainabilty, testing, etc.
+
+## 6.56 - Source Maps with Webpack
+- Source Maps make debugging way easier by showing you exactly where in your readable code the error was, rather than in the minified version that webpack spits out.
+
+## 6.57 - Web Dev Server
+- Switching out for using instead of live-server.
