@@ -1,9 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-console.log('app.js')
+import IndecisionApp from './components/IndecisionApp'
 
-
-const template = <p>JSX!</p>
-
-ReactDOM.render(template, document.getElementById('app'))
+ReactDOM.render(<IndecisionApp />, document.getElementById('app'))

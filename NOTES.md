@@ -552,4 +552,5 @@ export default (a, b) => a - b
 ```
 import validator from 'validator'
 ```
-## 6.54 - Setting up Babel with Webpack
+## 6.55 - One Component Per File
+- It is conventional to put each component in its own file. This helps with reusability, scalability, maintainabilty, testing, etc.
