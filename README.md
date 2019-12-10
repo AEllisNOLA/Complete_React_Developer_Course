@@ -17,4 +17,4 @@ In a second terminal, serve up the public folder with:
 live-server public
 ```
 
-A localhost site should open and will also print in the console.
+A localhost site should open and will also print in the console.# Expensify_App-Complete_React_Developers_Course
