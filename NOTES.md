@@ -560,3 +560,21 @@ import validator from 'validator'
 
 ## 6.57 - Web Dev Server
 - Switching out for using instead of live-server.
+
+## 6.58 - ES6 Class Properties
+- The new Prpoerty Syntax does away with the need to create constructor functions and bind event handlers.
+
+```
+class NewSyntax {
+    name = 'Josh'
+    getGreeting = () => {
+        return `Hello, my name is ${this.name}`
+    }
+}
+```
+
+- For Class Properties syntax, the binding is not broken because arrow functions do not bind their own this value. They use whatever is in scope and for arrow functions, that is the Class instance itself.
+
+- Class Properties are great for seting default state values and setting up event handlers.
+
+- For built-in React methods, continue using method syntax.
