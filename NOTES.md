@@ -578,3 +578,89 @@ class NewSyntax {
 - Class Properties are great for seting default state values and setting up event handlers.
 
 - For built-in React methods, continue using method syntax.
+
+## 7.60 - Passing Children To Component
+- Using props is one way to pass JSX to components. Such as:
+
+```
+const Layout = (props) => {
+    return (
+        <div>
+            <p>Header</p>
+            {props.content}
+            <p>Footer</p>
+        </div>
+    )
+}
+
+const template = (
+    <div>
+        <h1>Page Title</h1>
+        <p>This is my page</p>
+    </div>
+)
+
+ReactDOM.render(<Layout content={template}/>, document.getElementById('app'))
+```
+
+- You may also set up a seperate opening/closing tag for what you are rendering and add stuff in the middle. Then pass in props.children where you want the content.
+
+```
+const Layout = (props) => {
+    return (
+        <div>
+            <p>Header</p>
+            {props.children}
+            <p>Footer</p>
+        </div>
+    )
+}
+
+const template = (
+    <div>
+        <h1>Page Title</h1>
+        <p>This is my page</p>
+    </div>
+)
+
+ReactDOM.render((
+    <Layout>
+        <h1>Title</h1>
+        <p>body</p>
+    </Layout>
+), document.getElementById('app'))
+```
+
+- Third Party Components use this technique often, so it is important to know it.
+
+## 7.61 - Setting Up React Modal
+- To turn something into a "True Boolean", use two !!s. This takes undefined vs. text and turns it into true or false.
+
+## 7.62 - Refactoring Other Stateless Components
+- Stateless Components can be refactored to use implicit return. So that the original version:
+
+```
+const Action = (props) => {
+    return (
+        <div>
+            <button
+                onClick={props.handlePick}
+                disabled={!props.hasOptions}>What Should I Do?!?
+            </button>
+        </div>
+    )
+}
+```
+
+becomes
+
+'''
+const Action = (props) => (
+    <div>
+            <button
+                onClick={props.handlePick}
+                disabled={!props.hasOptions}>What Should I Do?!?
+            </button>
+        </div>
+)
+'''
